@@ -17,7 +17,11 @@ module Airbrake
     end
 
     def user_id
+      begin
       session.first["data"]["user_credentials_id"]
+      rescue
+        nil
+      end
     end
   end
 end
