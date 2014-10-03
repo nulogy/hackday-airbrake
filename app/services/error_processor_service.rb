@@ -21,8 +21,11 @@ module ErrorProcessorService
 
     error.username = user.email
     error.site_name = site.name
+    error.site_id = site.id
     error.account_name = account.name
+    error.account_id = account.id
     error.company_name = company.name
+    error.company_id = company.id
     error.save!
   end
 

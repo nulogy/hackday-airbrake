@@ -23,5 +23,9 @@ module Airbrake
     def self.url
       "/groups"
     end
+
+    def user_id
+      session.first["data"]["user_credentials_id"]
+    end
   end
 end

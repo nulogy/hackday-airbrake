@@ -8,10 +8,10 @@
   </thead>
 
   <tbody>
-    <% @group.attributes.each do |attribute| %>
+    <% @group.attributes.each do |attribute, value| %>
       <tr>
         <td><%= attribute %></td>
-        <td><%= @group.send(attribute).inspect %></td>
+        <td><%= value %></td>
       </tr>
     <% end %>
   </tbody>
