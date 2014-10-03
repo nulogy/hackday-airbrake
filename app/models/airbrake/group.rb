@@ -8,6 +8,8 @@ module Airbrake
     define_attrs :resolved, :project_id
     define_attrs :notices_count, :error_message, :error_class
 
+    attr_accessor :xml
+
     def url
       "/errors/#{id}"
     end
@@ -17,10 +19,16 @@ module Airbrake
     end
 
     def user_id
-      begin
-      session.first["data"]["user_credentials_id"]
-      rescue
-        nil
+      session_data['user_credentials_id']
+    rescue
+      nil
+    end
+
+    def session_data
+      if @session.is_a?(Array)
+        @session.first["data"]
+      else
+        @session["data"]
       end
     end
   end

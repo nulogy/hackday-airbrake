@@ -12,10 +12,10 @@ Found:: <%= @errors.count %> <br />
     </thead>
 
     <tbody>
-      <% error.attributes.each do |attribute| %>
+      <% error.attributes.each do |attribute, value| %>
         <tr>
           <td><%= attribute %></td>
-          <td><%= error.send(attribute).inspect %></td>
+          <td><%= value.inspect %></td>
         </tr>
       <% end %>
     </tbody>

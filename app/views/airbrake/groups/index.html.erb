@@ -21,7 +21,11 @@ Found:: <%= @groups.count %> <br />
 
       <tr>
         <td>Actions</td>
-        <td><%= button_to 'Create Error', errors_url(group_id: group.id), method: :post %></td>
+        <td>
+          <% if !has_error(group) %>
+            <%= button_to 'Create Error', errors_url(group_id: group.id), method: :post, class: 'btn btn-success' %>
+          <% end %>
+        </td>
       </tr>
     </tbody>
   <% end %>
