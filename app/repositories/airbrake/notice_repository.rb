@@ -18,7 +18,12 @@ module Airbrake
     def find_for_group(group)
       url = Airbrake::UrlBuilder.notices_url(group)
       xml = open(url).read
-      NoticeDeserializer.from_airbrake_xml(xml)
+      
+      notices = Array(NoticeDeserializer.from_airbrake_xml(xml))
+
+      notices.each do |notice|
+        notice.group = group
+      end
     end
 
     def find_for_group_id(group_id)

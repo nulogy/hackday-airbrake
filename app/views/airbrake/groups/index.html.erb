@@ -3,7 +3,12 @@ Found:: <%= @groups.count %> <br />
 <table class="table table-striped table-hover">
   <% @groups.each_with_index do |group, index| %>
     <thead>
-      <th colspan=2><h2>Group #<%= index+1 %> </h2></th>
+      <th colspan=2>
+          <h2>
+            Group #<%= index+1 %> - <%= link_to 'View Notices', airbrake_notices_url(group_id: group.id) %> 
+          </h2>
+      </th>
+
     </thead>
 
     <tbody>
