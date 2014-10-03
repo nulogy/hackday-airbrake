@@ -40,14 +40,13 @@ module.exports = function (grunt) {
     requirejs: {
       compile: {
         options: {
-
           almond: true,
           findNestedDependencies: true,
           removeCombined: true,
           skipDirOptimize: true,
           fileExclusionRegExp: /^\./,
-          appDir: 'public',
-          baseUrl: 'js/',
+          appDir: 'public/js',
+          baseUrl: './',
           mainConfigFile: 'js/requireConfig.js',
           dir: '../public/js',
           modules: [{
@@ -156,5 +155,5 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.registerTask('default', ['connect', 'watch']);
   grunt.registerTask('server', ['connect', 'jade:development', 'less:development', 'copy:development', 'watch']);
-  grunt.registerTask('build', ['requirejs','jade:production', 'less:production', 'copy:production']);
+  grunt.registerTask('build', ['copy:development', 'requirejs','jade:production', 'less:production', 'copy:production']);
 };
