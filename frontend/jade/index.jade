@@ -15,7 +15,7 @@ html(lang="en")
             .col-md-4.col-sm-8
               .form-group
                 label Environment
-                input.form-control.environment
+                input.form-control.environment(name="environment")
             .col-md-4.col-sm-8
               .form-group
                 label Category
@@ -35,7 +35,7 @@ html(lang="en")
                 label Site
                 input.form-control.site(name="site", placeholder="Site ID")
 
-          button.btn.btn-default(type="submit") Submit
+          button.btn.btn-default.submit(type="submit") Submit
       .results
         table.table
           thead
@@ -45,7 +45,7 @@ html(lang="en")
               th Site ID
               th User ID
               th Controller
-              th Method
+              th Category
           tbody
             tr
               td 123
