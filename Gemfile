@@ -41,9 +41,10 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'twitter-bootstrap-rails'
+gem 'nokogiri'
 gem 'nori'
 
 group :development do
-  gem "better_errors"
+  gem "better_errors", '=1.1.0'
   gem "binding_of_caller"
 end
