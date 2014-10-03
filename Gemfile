@@ -42,3 +42,8 @@ gem 'spring',        group: :development
 
 gem 'twitter-bootstrap-rails'
 gem 'nori'
+
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+end
