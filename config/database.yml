@@ -23,3 +23,12 @@ test:
 production:
   <<: *default
   database: db/production.sqlite3
+
+snapshot_database:
+  adapter: postgresql
+  host: cohiba.local
+  user: nulogy
+  password: Nulogy4Ever
+  port: 5432
+  template: template_packmanager
+  database: packmanager_na_snapshot_<%= (DateTime.now - 1.day).strftime("%Y%m%d") %>
