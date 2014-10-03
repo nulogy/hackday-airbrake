@@ -1,0 +1,21 @@
+{
+  "name": "airbrake-frontend",
+  "version": "0.0.1",
+  "homepage": "https://github.com/nulogy/hackday-airbrake",
+  "authors": [
+    "Yazan Medanat <yazanm@nulogy.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.2.0"
+  }
+}
