@@ -4,3 +4,68 @@ html(lang="en")
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel='stylesheet', href='/css/common.css')
+    link(rel='stylesheet', href='/css/main.css')
+
+  body
+    .container-fluid
+      .filters
+        form(role="form")
+          .row
+            .col-md-4.col-sm-8
+              .form-group
+                label Environment
+                input.form-control.environment
+            .col-md-4.col-sm-8
+              .form-group
+                label Category
+                input.form-control.category(name="category")
+
+          .row
+            .col-md-4.col-sm-8
+              .form-group
+                label Company
+                input.form-control.company(name="company", placeholder="Company ID")
+            .col-md-4.col-sm-8
+              .form-group
+                label Account
+                input.form-control.account(name="account", placeholder="Account ID")
+            .col-md-4.col-sm-8
+              .form-group
+                label Site
+                input.form-control.site(name="site", placeholder="Site ID")
+
+          button.btn.btn-default(type="submit") Submit
+      .results
+        table.table
+          thead
+            tr
+              th Error ID
+              th Account ID
+              th Site ID
+              th User ID
+              th Controller
+              th Method
+          tbody
+            tr
+              td 123
+              td 333
+              td 32
+              td 12321321321
+              td production_controller
+              td update
+    - if (environment === "development") {
+      script(type="text/javascript", src='/js/require.js')
+
+      script.
+        require(['/js/requireConfig.js'], function (config) {
+          try {
+            require(['main']);
+          } catch (e) {
+            console.log(e);
+          }
+        });
+    - } else {
+        script(type="text/javascript", src='/js/common.js')
+        script(type="text/javascript", src='/js/main.js')
+    - }
