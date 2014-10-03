@@ -1,7 +1,16 @@
 module ErrorProcessorService
 
+  CATEGORIES = {
+      "production" => ["production", "job", "project"],
+      "picking" => ["pick"],
+      "shipping/receiving" => ["receipt", "receive", "ship"],
+      "mobile" => ["mobile"],
+      "moves" => ["move"]
+  }
+
   def self.process(error)
     add_extra_info(error)
+    categorize(error)
   end
 
   def self.add_extra_info(error)
@@ -31,5 +40,16 @@ module ErrorProcessorService
 
   def self.find_company(account)
     SnapshotDatabase::Company.find_by_id account.company_id
+  end
+
+  def self.categorize(error)
+    CATEGORIES.each do |category, match_words|
+      match_words.each do |match_word|
+        unless error.controller.scan(match_word).empty?
+          error.update_attributes! :category => category
+          break
+        end
+      end
+    end
   end
 end
