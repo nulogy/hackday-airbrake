@@ -54,5 +54,8 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  resources :airbrake
+  namespace :airbrake do
+    resources :groups
+    resources :notices
+  end
 end
