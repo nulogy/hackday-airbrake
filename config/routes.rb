@@ -58,4 +58,6 @@ Rails.application.routes.draw do
     resources :groups
     resources :notices
   end
+
+  get 'autcomplete/:action/:q' => 'autocomplete'
 end

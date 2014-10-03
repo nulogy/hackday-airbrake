@@ -43,6 +43,8 @@ gem 'spring',        group: :development
 gem 'twitter-bootstrap-rails'
 gem 'nokogiri'
 gem 'nori'
+gem 'squeel'
+gem 'rabl'
 
 group :development do
   gem "better_errors", '=1.1.0'
