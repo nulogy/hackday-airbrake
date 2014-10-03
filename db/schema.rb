@@ -11,9 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141003153706) do
+ActiveRecord::Schema.define(version: 20141003184201) do
 
-  create_table "exceptions_tables", force: true do |t|
+  create_table "airbrake_exceptions", force: true do |t|
+    t.text "xml_result"
+  end
+
+  create_table "errors", force: true do |t|
+    t.integer "user_id"
+    t.text    "error_message"
+    t.integer "site_id"
+    t.integer "account_id"
+    t.integer "company_id"
+    t.text    "site_name"
+    t.text    "account_name"
+    t.text    "company_name"
+    t.text    "username"
+    t.text    "controller"
+    t.text    "category"
   end
 
 end
