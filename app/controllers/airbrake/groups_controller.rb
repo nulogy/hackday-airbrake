@@ -4,8 +4,6 @@ class Airbrake::GroupsController < ApplicationController
   end
 
   def show
-    group = Airbrake::GroupRepository.find(params[:id])
-    @group = ErrorFactory.create_error(group)
-    p @group
+    @group = Airbrake::GroupRepository.find(params[:id])
   end
 end

@@ -4,9 +4,9 @@ Found:: <%= @groups.count %> <br />
   <% @groups.each_with_index do |group, index| %>
     <thead>
       <th colspan=2>
-          <h2>
-            Group #<%= index+1 %> - <%= link_to 'View Notices', airbrake_notices_url(group_id: group.id) %> 
-          </h2>
+          <h3>
+            <%= link_to "Group ##{group.id}", airbrake_group_url(id: group.id) %> - <%= link_to 'View Notices', airbrake_notices_url(group_id: group.id) %> 
+          </h3>
       </th>
 
     </thead>
@@ -18,7 +18,11 @@ Found:: <%= @groups.count %> <br />
           <td><%= group.send(attribute).inspect %></td>
         </tr>
       <% end %>
-    </tbody>
 
+      <tr>
+        <td>Actions</td>
+        <td><%= button_to 'Create Error', errors_url(group_id: group.id), method: :post %></td>
+      </tr>
+    </tbody>
   <% end %>
 </table>

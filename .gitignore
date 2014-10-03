@@ -21,3 +21,7 @@
 /frontend/node_modules
 
 /frontend/bower_components
+/frontend/public
+/public/js
+/public/css
+/public/index.html

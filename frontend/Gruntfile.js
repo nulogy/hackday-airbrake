@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       },
       js: {
         files: ['js/**/*.js'],
-        tasks: [],
+        tasks: ['copy:development'],
       },
       jade: {
         files: ['jade/**/*.jade'],
@@ -24,7 +24,7 @@ module.exports = function(grunt) {
       server: {
         options: {
           port: 8282,
-          base: '.'
+          base: './public'
         }
       }
     },
@@ -45,15 +45,15 @@ module.exports = function(grunt) {
           removeCombined: true,
           skipDirOptimize: true,
           fileExclusionRegExp: /^\./,
-          appDir: '',
-          baseUrl: 'js/',
+          appDir: 'public/js',
+          baseUrl: './',
           mainConfigFile: 'js/requireConfig.js',
-          dir: 'dist/js',
+          dir: '../public/js',
           modules: [{
-            name: 'airbrake-frontend/common'
+            name: 'common'
           }, {
-            name: 'airbrake-frontend/main',
-            exclude: ['airbrake-frontend/common']
+            name: 'main',
+            exclude: ['common']
           }]
         }
       }
@@ -67,7 +67,7 @@ module.exports = function(grunt) {
           pretty: true
         },
         files: {
-          "html/index.html": "jade/index.jade"
+          "public/index.html": "jade/index.jade"
         }
       },
       production: {
@@ -75,10 +75,10 @@ module.exports = function(grunt) {
           data: {
             environment: "production"
           },
-          pretty: true
+          pretty: false
         },
         files: {
-          "dist/index.html": "jade/index.jade"
+          "../public/index.html": "jade/index.jade"
         }
       }
     },
@@ -88,8 +88,8 @@ module.exports = function(grunt) {
           paths: ["less"]
         },
         files: {
-          "css/common.css": "less/common.less",
-          "css/main.css": "less/main.less"
+          "public/css/common.css": "less/common.less",
+          "public/css/main.css": "less/main.less"
         }
       },
       production: {
@@ -97,8 +97,8 @@ module.exports = function(grunt) {
           paths: ["less"]
         },
         files: {
-          "dist/css/common.css": "less/common.less",
-          "dist/css/main.css": "less/main.less"
+          "../public/css/common.css": "less/common.less",
+          "../public/css/main.css": "less/main.less"
         }
       }
     },
@@ -109,7 +109,38 @@ module.exports = function(grunt) {
           dest: 'dist/'
         }, {
           src: 'fonts/*',
-          dest: 'dist/'
+          dest: '../dist/'
+        }]
+      },
+      development: {
+        files: [{
+          expand: true,
+          cwd: 'img/',
+          src: ['*'],
+          dest: 'public/css/'
+        }, {
+          src: 'js/*',
+          dest: 'public/'
+        }, {
+          src: 'bower_components/requirejs/require.js',
+          dest: 'public/js/require.js'
+        }, {
+          src: 'bower_components/bootstrap/dist/js/bootstrap.js',
+          dest: 'public/js/bootstrap.js'
+        }, {
+          src: 'bower_components/jquery/dist/jquery.js',
+          dest: 'public/js/jquery.js'
+        }, {
+          src: 'bower_components/select2/select2.js',
+          dest: 'public/js/select2.js'
+        }]
+      },
+      production: {
+       files: [{
+          expand: true,
+          cwd: 'img/',
+          src: ['*'],
+          dest: '../public/css/'
         }]
       }
     }
@@ -122,8 +153,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-requirejs');
   grunt.loadNpmTasks('grunt-contrib-copy');
-
   grunt.registerTask('default', ['connect', 'watch']);
-  grunt.registerTask('server', ['connect', 'jade:development', 'less:development', 'watch']);
-  grunt.registerTask('build', ['requirejs','jade:production', 'less:production', 'copy']);
+  grunt.registerTask('server', ['connect', 'jade:development', 'less:development', 'copy:development', 'watch']);
+  grunt.registerTask('build', ['copy:development', 'requirejs','jade:production', 'less:production', 'copy:production']);
 };
