@@ -1,4 +1,4 @@
-define(['jquery', 'bootstrap', 'select2'], function ($) {
+define(['jquery', 'bootstrap', 'select2', 'angular'], function ($) {
   $(".category").select2({
     placeholder: "Select a Category",
     allowClear: true,

@@ -4,12 +4,9 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     watch: {
-      options: {
-        livereload: true
-      },
       js: {
         files: ['js/**/*.js'],
-        tasks: ['copy:development'],
+        tasks: ['requirejs', 'copy:development'],
       },
       jade: {
         files: ['jade/**/*.jade'],
@@ -48,7 +45,7 @@ module.exports = function (grunt) {
           appDir: 'public/js',
           baseUrl: './',
           mainConfigFile: 'js/requireConfig.js',
-          dir: '../public/js',
+          dir: '../../public/js',
           modules: [{
             name: 'common'
           }, {
@@ -67,7 +64,7 @@ module.exports = function (grunt) {
           pretty: true
         },
         files: {
-          "public/index.html": "jade/index.jade"
+          "../public/index.html": "jade/index.jade"
         }
       },
       production: {
@@ -88,8 +85,8 @@ module.exports = function (grunt) {
           paths: ["less"]
         },
         files: {
-          "public/css/common.css": "less/common.less",
-          "public/css/main.css": "less/main.less"
+          "../public/css/common.css": "less/common.less",
+          "../public/css/main.css": "less/main.less"
         }
       },
       production: {
@@ -117,22 +114,25 @@ module.exports = function (grunt) {
           expand: true,
           cwd: 'img/',
           src: ['*'],
-          dest: 'public/css/'
+          dest: '../public/css/'
         }, {
           src: 'js/*',
-          dest: 'public/'
+          dest: '../public/'
         }, {
           src: 'bower_components/requirejs/require.js',
-          dest: 'public/js/require.js'
+          dest: '../public/js/require.js'
         }, {
           src: 'bower_components/bootstrap/dist/js/bootstrap.js',
-          dest: 'public/js/bootstrap.js'
+          dest: '../public/js/bootstrap.js'
         }, {
           src: 'bower_components/jquery/dist/jquery.js',
-          dest: 'public/js/jquery.js'
+          dest: '../public/js/jquery.js'
         }, {
           src: 'bower_components/select2/select2.js',
-          dest: 'public/js/select2.js'
+          dest: '../public/js/select2.js',
+        }, {
+          src: 'bower_components/angular/angular.js',
+          dest: '../public/js/angular.js'
         }]
       },
       production: {
@@ -153,7 +153,9 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-requirejs');
   grunt.loadNpmTasks('grunt-contrib-copy');
+
   grunt.registerTask('default', ['connect', 'watch']);
   grunt.registerTask('server', ['connect', 'jade:development', 'less:development', 'copy:development', 'watch']);
+  grunt.registerTask('development', ['jade:development', 'less:development', 'copy:development', 'requirejs', 'watch']);
   grunt.registerTask('build', ['copy:development', 'requirejs','jade:production', 'less:production', 'copy:production']);
 };
