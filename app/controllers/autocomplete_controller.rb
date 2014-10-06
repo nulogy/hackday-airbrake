@@ -1,23 +1,13 @@
 class AutocompleteController < ApplicationController
   respond_to :json
 
-  def categories
-    if params[:q]
-      @categories = CategoriesRepository.where(params[:q])
-    else
-      @categories = CategoriesRepository.all
-    end
-
-    respond_with @categories
+  def all
+    @fields = FieldRepository.all(params[:field_name])
+    respond_with @fields    
   end
 
-  def environments
-    if params[:q]
-      @environments = EnvironmentsRepository.where(params[:q])
-    else
-      @environments = EnvironmentsRepository.all
-    end
-
-    respond_with @environments
+  def contains
+    @fields = FieldRepository.all(params[:field_name], params[:q])
+    respond_with @fields    
   end
 end

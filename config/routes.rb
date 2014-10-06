@@ -61,6 +61,6 @@ Rails.application.routes.draw do
 
   resources :errors
   
-  get 'autocomplete/:action', controller: 'autocomplete'
-  get 'autocomplete/:action/:q', controller: 'autocomplete'
+  get 'autocomplete/:field_name', controller: 'autocomplete', action: 'all'
+  get 'autocomplete/:field_name/:q', controller: 'autocomplete', action: 'match'
 end

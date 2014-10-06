@@ -133,6 +133,9 @@ module.exports = function (grunt) {
         }, {
           src: 'bower_components/angular/angular.js',
           dest: '../public/js/angular.js'
+        }, {
+          src: 'bower_components/lodash/dist/lodash.js',
+          dest: '../public/js/lodash.js'
         }]
       },
       production: {

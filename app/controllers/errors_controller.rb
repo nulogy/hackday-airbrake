@@ -1,10 +1,14 @@
 class ErrorsController < ApplicationController
+  respond_to :html, :json
+
   def index
-    if params[:q] 
-      @errors = ErrorRepository.where(params[:q])
+    if params[:filters].present?
+      @errors = ErrorRepository.where(params[:filters])
     else
       @errors = ErrorRepository.all
     end
+
+    respond_with(@errors)
   end
 
   def create

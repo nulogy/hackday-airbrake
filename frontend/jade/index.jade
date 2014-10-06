@@ -7,53 +7,63 @@ html(lang="en")
     link(rel='stylesheet', href='/css/common.css')
     link(rel='stylesheet', href='/css/main.css')
 
-  body
+  body(ng-controller="FiltersController as ctrl")
     .container-fluid
       .filters
-        form(role="form")
+        form(role="form", ng-submit="ctrl.updateErrors()")
           .row
             .col-md-4.col-sm-8
               .form-group
                 label Environment
-                input.form-control.environment(name="environment")
+                input.form-control.environment(name="environment", ng-model="ctrl.filters.environment")
             .col-md-4.col-sm-8
               .form-group
                 label Category
-                input.form-control.category(name="category")
+                input.form-control.category(name="category", ng-model="ctrl.filters.category")
 
           .row
             .col-md-4.col-sm-8
               .form-group
-                label Company
-                input.form-control.company(name="company", placeholder="Company ID")
+                label Company Name
+                input.form-control.company_name(name="company_name", ng-model="ctrl.filters.company_name")
             .col-md-4.col-sm-8
               .form-group
-                label Account
-                input.form-control.account(name="account", placeholder="Account ID")
+                label Account Name
+                input.form-control.account_name(name="account_name", ng-model="ctrl.filters.account_name")
             .col-md-4.col-sm-8
               .form-group
                 label Site
-                input.form-control.site(name="site", placeholder="Site ID")
+                input.form-control.site(name="site", placeholder="Site ID", ng-model="ctrl.filters.site")
 
           button.btn.btn-default.submit(type="submit") Submit
+      
       .results
         table.table
           thead
             tr
               th Error ID
-              th Account ID
+              th Company
+              th Account
               th Site ID
-              th User ID
+              th User
               th Controller
               th Category
+      
           tbody
-            tr
-              td 123
-              td 333
-              td 32
-              td 12321321321
-              td production_controller
-              td update
+            tr(ng-show="ctrl.noErrors")
+              td(colspan=6) No Errors
+
+            tr(ng-hide="ctrl.noErrors" ng-repeat="error in ctrl.errors")
+              td(ng-bind="error.id")
+              td(ng-bind="error.company_name")
+              td(ng-bind="error.account_name")
+              td(ng-bind="error.site_id")
+              td(ng-bind="error.username")
+              td {{error.controller}}\#{{error.action}}
+              td(ng-bind="error.category")
+
+
+
     - if (environment === "development") {
       script(type="text/javascript", src='/js/require.js')
 
