@@ -2,7 +2,7 @@ module FieldRepository
   extend self
 
   def where(field, contains)
-    extract_result(Error.where { my{field} =~ "%#{contains}%" }, field)
+    extract_result(Error.where { my{field.to_sym}.like "%#{contains}%" }, field)
   end
 
   def all(field)

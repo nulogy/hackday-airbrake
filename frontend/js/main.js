@@ -47,59 +47,46 @@ define(['jquery', 'lodash', 'bootstrap', 'select2', 'angular'], function ($) {
   app.controller('FiltersController', FiltersController);
   angular.bootstrap(document, ['gingerQuake']);
 
-  var resultsMapper = function (data) {
-    return { results: _.map(data, function(text) { return {id: text, text: text } }) };
+  function setupAutoComplete(selector, config) {
+    var defaults = {
+      allowClear: true,
+      multiple: true,
+      ajax: {
+        dataType: 'json',
+        results: function (data) {
+          return { 
+            results: _.map(data, function(text) { return {id: text, text: text} })
+          };
+        }
+      }
+    };
+
+    $(selector).select2(_.merge(defaults, config));
   }
 
-  $(".category").select2({
+  function autocompleteUrlBuilder(field) {
+    return function (term) {
+      return '/autocomplete/' + field + '/' + term;
+    };
+  }
+
+  setupAutoComplete(".category", {
     placeholder: "Select a Category",
-    allowClear: true,
-    multiple: true,
-    ajax: {
-      dataType: 'json',
-      url: function (term) {
-        return '/autocomplete/category/' + term;
-      },
-      results: resultsMapper
-    }
+    ajax: { url: autocompleteUrlBuilder('category') }
   });
 
-  $(".environment").select2({
+  setupAutoComplete(".environment", {
     placeholder: "Select an Environment",
-    allowClear: true,
-    multiple: true,
-    ajax: {
-      dataType: 'json',
-      url: function (term) {
-        return '/autocomplete/environment/' + term;
-      },
-      results: resultsMapper
-    }
+    ajax: { url: autocompleteUrlBuilder('environment') }
   });
 
-  $(".company_name").select2({
-    placeholder: "Select an Company Name",
-    allowClear: true,
-    multiple: true,
-    ajax: {
-      dataType: 'json',
-      url: function (term) {
-        return '/autocomplete/company_name/' + term;
-      },
-      results: resultsMapper
-    }
+  setupAutoComplete(".company_name", {
+    placeholder: "Select a Company",
+    ajax: { url: autocompleteUrlBuilder('company_name') }
   });
 
-  $(".account_name").select2({
-    placeholder: "Select an Account Name",
-    allowClear: true,
-    multiple: true,
-    ajax: {
-      dataType: 'json',
-      url: function (term) {
-        return '/autocomplete/account_name/' + term;
-      },
-      results: resultsMapper
-    }
+  setupAutoComplete(".account_name", {
+    placeholder: "Select an Account",
+    ajax: { url: autocompleteUrlBuilder('account_name') }
   });
 });

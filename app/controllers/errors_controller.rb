@@ -3,7 +3,8 @@ class ErrorsController < ApplicationController
 
   def index
     if params[:filters].present?
-      @errors = ErrorRepository.where(params[:filters])
+      filters = FilterParamsReformatter.reformat(params[:filters])
+      @errors = ErrorRepository.where(filters)
     else
       @errors = ErrorRepository.all
     end
@@ -20,5 +21,16 @@ class ErrorsController < ApplicationController
 
   def show
     @error = ErrorRepository.find(params[:id])
+  end
+
+private
+  module FilterParamsReformatter
+    extend self
+
+    def reformat(filters)
+      filters.each_with_object({}) do |(field, filters), memo|
+        memo[field] = filters.split(",")
+      end
+    end
   end
 end

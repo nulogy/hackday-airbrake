@@ -7,7 +7,7 @@ class AutocompleteController < ApplicationController
   end
 
   def contains
-    @fields = FieldRepository.all(params[:field_name], params[:q])
-    respond_with @fields    
+    @fields = FieldRepository.where(params[:field_name], params[:q])
+    respond_with @fields
   end
 end
