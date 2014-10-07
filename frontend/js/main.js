@@ -37,8 +37,13 @@ define(['jquery', 'lodash', 'bootstrap', 'select2', 'angular'], function ($) {
   };
 
   FiltersController.prototype.updateErrors = function() {
-    console.log("Filtering on :: ", this.filters)
-    this.ErrorsRepository.fetchErrors(this.filters).then(this.setErrors);
+    var transformedFilters = _.transform(this.filters, function (result, value, key) {
+      if(!_.isEmpty(value)) {
+        result[key] = value
+      }
+    });
+
+    this.ErrorsRepository.fetchErrors(transformedFilters).then(this.setErrors);
   }
 
 
