@@ -31,4 +31,4 @@ snapshot_database:
   password: Nulogy4Ever
   port: 5432
   template: template_packmanager
-  database: packmanager_na_snapshot_<%= (DateTime.now - 1.day).strftime("%Y%m%d") %>
+  database: packmanager_na_snapshot_20141104

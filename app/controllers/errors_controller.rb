@@ -29,7 +29,11 @@ private
 
     def reformat(filters)
       filters.each_with_object({}) do |(field, filters), memo|
-        memo[field] = filters.split(",")
+        if filters.is_a?(Hash)
+          memo[field.to_sym] = reformat(filters)
+        else
+          memo[field.to_sym] = filters.split(",")
+        end
       end
     end
   end
