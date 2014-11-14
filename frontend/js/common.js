@@ -1,1 +1,1 @@
-define(['jquery', 'bootstrap', 'select2', 'angular']);
+define(['jquery', 'bootstrap', 'select2', 'angular-bootstrap']);

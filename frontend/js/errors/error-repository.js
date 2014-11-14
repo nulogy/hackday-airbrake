@@ -1,9 +1,12 @@
 define(['jquery'], function ($) {
   function ErrorRepository($http, deserialize) {
     return {
-      fetchErrors: function(filters) {
+      fetchErrors: function(filters, pagination) {
         var config = { responseType: 'json' };
-        var params = { filters: filters };
+        var params = {
+          filters: filters,
+          pagination: pagination
+        };
 
         var url = '/errors.json?' + $.param(params);
 

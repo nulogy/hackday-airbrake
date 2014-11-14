@@ -67,9 +67,14 @@ html(lang="en")
               td(ng-bind="error.username")
               td {{error.controller}}\#{{error.action}}
               td(ng-bind="error.category")
-              td(ng-bind="error.taskforce_id")
+              td(ng-bind="error.taskforce.name")
               td
                 button.btn.btn-success.btn-xs View Details
+
+        div.text-center(ng-controller="PaginationCtrl as ctrl")
+          pagination.pagination-sm(total-items="totalItems" ng-model="currentPage" boundary-links="true" num-pages="numPages")
+
+
 
     - if (environment === "development") {
       script(type="text/javascript", src='/js/require.js')
@@ -77,7 +82,7 @@ html(lang="en")
       script.
         require(['/js/requireConfig.js'], function (config) {
           try {
-            require(['main']);e
+            require(['main']);
           } catch (e) {
             console.log(e);
           }

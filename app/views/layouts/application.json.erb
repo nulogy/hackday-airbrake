@@ -1,0 +1,8 @@
+{
+  "result": <%= yield %>,
+  "pagination": {
+    "offset": <%= @pagination[:offset] %>,
+    "limit": <%= @pagination[:limit] %>,
+    "rowCount": <%= @collection.except(:limit, :offset).count %>
+  }
+}

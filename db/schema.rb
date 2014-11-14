@@ -36,6 +36,9 @@ ActiveRecord::Schema.define(version: 20141114182157) do
     t.integer "taskforce_id"
   end
 
+  create_table "exceptions_tables", force: true do |t|
+  end
+
   create_table "taskforces", force: true do |t|
     t.string   "name"
     t.datetime "created_at"

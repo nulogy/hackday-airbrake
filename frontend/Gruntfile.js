@@ -6,7 +6,7 @@ module.exports = function (grunt) {
     watch: {
       js: {
         files: ['js/**/*.js'],
-        tasks: ['requirejs', 'copy:development'],
+        tasks: ['copy:development'],
       },
       jade: {
         files: ['jade/**/*.jade'],
@@ -124,6 +124,9 @@ module.exports = function (grunt) {
           src: 'bower_components/angular/angular.js',
           dest: 'js/lib/angular.js',
         }, {
+          src: 'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+          dest: 'js/lib/angular-bootstrap.js',
+        }, {
           src: 'bower_components/lodash/dist/lodash.js',
           dest: 'js/lib/lodash.js',
         }]
@@ -160,6 +163,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', ['connect', 'watch']);
   grunt.registerTask('server', ['connect', 'jade:development', 'less:development', 'copy:development', 'watch']);
-  grunt.registerTask('development', ['jade:development', 'less:development', 'copy:lib', 'requirejs', 'copy:development', 'watch']);
+  grunt.registerTask('development', ['jade:development', 'less:development', 'copy:lib', 'copy:development', 'watch']);
   grunt.registerTask('build', ['copy:development', 'requirejs','jade:production', 'less:production', 'copy:production']);
 };
