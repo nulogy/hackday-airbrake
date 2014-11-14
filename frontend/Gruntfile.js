@@ -42,7 +42,7 @@ module.exports = function (grunt) {
           removeCombined: true,
           skipDirOptimize: true,
           fileExclusionRegExp: /^\./,
-          appDir: 'public/js',
+          appDir: '../public/js',
           baseUrl: './',
           mainConfigFile: 'js/requireConfig.js',
           dir: '../../public/js',
