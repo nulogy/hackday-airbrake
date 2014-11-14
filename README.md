@@ -1,21 +1,21 @@
 
-==Frontend Setup
+## Frontend Setup
 
-'''
+```bash
 cd frontend
 npm install
 bower install
 npm install -g grunt-cli
-'''
+```
 
-for development
-'''
+### For development
+```bash
 cd frontend
 grunt server
-'''
+```
 
-for production
-'''
+### For production
+```bash
 cd frontend
 grunt build
-'''
+```
