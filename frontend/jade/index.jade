@@ -36,9 +36,9 @@ html(lang="en")
                 input.form-control.site(name="site", placeholder="Site ID", ng-model="ctrl.filters.site")
 
           button.btn.btn-default.submit(type="submit") Submit
-      
+
       .results
-        table.table
+        table.table.table-condensed.table-striped
           thead
             tr
               th Error ID
@@ -48,7 +48,8 @@ html(lang="en")
               th User
               th Controller
               th Category
-      
+              th Actions
+
           tbody
             tr(ng-show="ctrl.noErrors")
               td(colspan=6) No Errors
@@ -61,7 +62,8 @@ html(lang="en")
               td(ng-bind="error.username")
               td {{error.controller}}\#{{error.action}}
               td(ng-bind="error.category")
-
+              td
+                button.btn.btn-success.btn-xs View Details
 
 
     - if (environment === "development") {
