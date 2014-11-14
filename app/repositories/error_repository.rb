@@ -5,8 +5,8 @@ module ErrorRepository
     Error.all
   end
 
-  def where(*args)
-    Error.where(*args)
+  def where(filters)
+    Error.joins(:taskforce).where { filters }
   end
 
   def find(id)

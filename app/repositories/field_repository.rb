@@ -6,6 +6,7 @@ module FieldRepository
   end
 
   def all(field)
+    puts "yo dawg"
     extract_result(Error.select(field), field)
   end
 

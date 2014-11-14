@@ -20,6 +20,10 @@ html(lang="en")
               .form-group
                 label Category
                 input.form-control.category(name="category", ng-model="ctrl.filters.category")
+            .col-md-4.col-sm-8
+              .form-group
+                label Taskforce
+                input.form-control.taskforce_name(name="taskforce.name", ng-model="ctrl.filters.taskforce.name")
 
           .row
             .col-md-4.col-sm-8
@@ -32,8 +36,8 @@ html(lang="en")
                 input.form-control.account_name(name="account_name", ng-model="ctrl.filters.account_name")
             .col-md-4.col-sm-8
               .form-group
-                label Site
-                input.form-control.site(name="site", placeholder="Site ID", ng-model="ctrl.filters.site")
+                label Site ID
+                input.form-control.site_id(name="site_id", placeholder="Site ID", ng-model="ctrl.filters.site_id")
 
           button.btn.btn-default.submit(type="submit") Submit
 
@@ -48,6 +52,7 @@ html(lang="en")
               th User
               th Controller
               th Category
+              th Taskforce
               th Actions
 
           tbody
@@ -62,6 +67,7 @@ html(lang="en")
               td(ng-bind="error.username")
               td {{error.controller}}\#{{error.action}}
               td(ng-bind="error.category")
+              td(ng-bind="error.taskforce_id")
               td
                 button.btn.btn-success.btn-xs View Details
 
