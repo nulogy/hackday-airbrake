@@ -1,97 +1,62 @@
-define(['jquery', 'lodash', 'bootstrap', 'select2', 'angular'], function ($) {
-  var app = angular.module('gingerQuake', []);
+define([
+  'jquery',
+  'lodash',
+  'angular',
+  'errors/error_repository',
+  'errors/error_deserializer',
+  'filters_controller',
+  'select2'],
 
-  function ErrorsRepository($http, deserialize) {
-    return {
-      fetchErrors: function(filters) {
-        var config = { responseType: 'json' };
-        var params = { filters: filters };
+  function ($, _, angular, ErrorRepository, ErrorDeserializer, FiltersController) {
+    var app = angular.module('gingerQuake', []);
 
-        var url = '/errors.json?' + $.param(params);
+    app.factory('ErrorDeserializer', ['$http', ErrorDeserializer]);
+    app.factory('ErrorRepository', ['$http', 'ErrorDeserializer', ErrorRepository]);
+    app.controller('FiltersController', ['$scope', 'ErrorRepository', FiltersController]);
 
-        return $http.get(url, config).then(deserialize);
-      }
-    };
-  }
+    angular.bootstrap(document, ['gingerQuake']);
 
-  function ErrorDeserializer() {
-    return function(response) {
-      return response.data;
+    function setupAutoComplete(selector, config) {
+      var defaults = {
+        allowClear: true,
+        multiple: true,
+        ajax: {
+          dataType: 'json',
+          results: function (data) {
+            return {
+              results: _.map(data, function(text) { return {id: text, text: text} })
+            };
+          }
+        }
+      };
+
+      $(selector).select2(_.merge(defaults, config));
     }
-  }
 
-  function FiltersController($scope, ErrorsRepository) {
-    _.bindAll(this);
+    function autocompleteUrlBuilder(field) {
+      return function (term) {
+        return '/autocomplete/' + field + '/' + term;
+      };
+    }
 
-    this.errors = [];
-    this.filters = {};
-    this.hasErrors = false;
-    this.ErrorsRepository = ErrorsRepository;
-
-    this.updateErrors();
-  }
-
-  FiltersController.prototype.setErrors = function(errors) {
-    this.errors = errors;
-    this.hasErrors = (errors.length === 0);
-  };
-
-  FiltersController.prototype.updateErrors = function() {
-    var transformedFilters = _.transform(this.filters, function (result, value, key) {
-      if(!_.isEmpty(value)) {
-        result[key] = value
-      }
+    setupAutoComplete(".category", {
+      placeholder: "Select a Category",
+      ajax: { url: autocompleteUrlBuilder('category') }
     });
 
-    this.ErrorsRepository.fetchErrors(transformedFilters).then(this.setErrors);
+    setupAutoComplete(".environment", {
+      placeholder: "Select an Environment",
+      ajax: { url: autocompleteUrlBuilder('environment') }
+    });
+
+    setupAutoComplete(".company_name", {
+      placeholder: "Select a Company",
+      ajax: { url: autocompleteUrlBuilder('company_name') }
+    });
+
+    setupAutoComplete(".account_name", {
+      placeholder: "Select an Account",
+      ajax: { url: autocompleteUrlBuilder('account_name') }
+    });
   }
-
-
-  app.factory('ErrorsRepository', ['$http', 'ErrorDeserializer', ErrorsRepository]);
-  app.factory('ErrorDeserializer', ['$http', ErrorDeserializer]);
-  app.controller('FiltersController', FiltersController);
-  angular.bootstrap(document, ['gingerQuake']);
-
-  function setupAutoComplete(selector, config) {
-    var defaults = {
-      allowClear: true,
-      multiple: true,
-      ajax: {
-        dataType: 'json',
-        results: function (data) {
-          return { 
-            results: _.map(data, function(text) { return {id: text, text: text} })
-          };
-        }
-      }
-    };
-
-    $(selector).select2(_.merge(defaults, config));
-  }
-
-  function autocompleteUrlBuilder(field) {
-    return function (term) {
-      return '/autocomplete/' + field + '/' + term;
-    };
-  }
-
-  setupAutoComplete(".category", {
-    placeholder: "Select a Category",
-    ajax: { url: autocompleteUrlBuilder('category') }
-  });
-
-  setupAutoComplete(".environment", {
-    placeholder: "Select an Environment",
-    ajax: { url: autocompleteUrlBuilder('environment') }
-  });
-
-  setupAutoComplete(".company_name", {
-    placeholder: "Select a Company",
-    ajax: { url: autocompleteUrlBuilder('company_name') }
-  });
-
-  setupAutoComplete(".account_name", {
-    placeholder: "Select an Account",
-    ajax: { url: autocompleteUrlBuilder('account_name') }
-  });
-});
+);

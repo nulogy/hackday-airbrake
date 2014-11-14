@@ -65,14 +65,13 @@ html(lang="en")
               td
                 button.btn.btn-success.btn-xs View Details
 
-
     - if (environment === "development") {
       script(type="text/javascript", src='/js/require.js')
 
       script.
         require(['/js/requireConfig.js'], function (config) {
           try {
-            require(['main']);
+            require(['main']);e
           } catch (e) {
             console.log(e);
           }

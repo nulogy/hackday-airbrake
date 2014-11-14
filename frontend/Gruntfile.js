@@ -42,10 +42,10 @@ module.exports = function (grunt) {
           removeCombined: true,
           skipDirOptimize: true,
           fileExclusionRegExp: /^\./,
-          appDir: '../public/js',
-          baseUrl: './',
+          appDir: 'js',
+          baseUrl: '.',
+          dir: '../public/js',
           mainConfigFile: 'js/requireConfig.js',
-          dir: '../../public/js',
           modules: [{
             name: 'common'
           }, {
@@ -109,6 +109,25 @@ module.exports = function (grunt) {
           dest: '../dist/'
         }]
       },
+      lib: {
+        files: [
+         {
+          src: 'bower_components/bootstrap/dist/js/bootstrap.js',
+          dest: 'js/lib/bootstrap.js',
+        }, {
+          src: 'bower_components/jquery/dist/jquery.js',
+          dest: 'js/lib/jquery.js',
+        }, {
+          src: 'bower_components/select2/select2.js',
+          dest: 'js/lib/select2.js',
+        }, {
+          src: 'bower_components/angular/angular.js',
+          dest: 'js/lib/angular.js',
+        }, {
+          src: 'bower_components/lodash/dist/lodash.js',
+          dest: 'js/lib/lodash.js',
+        }]
+      },
       development: {
         files: [{
           expand: true,
@@ -116,26 +135,8 @@ module.exports = function (grunt) {
           src: ['*'],
           dest: '../public/css/'
         }, {
-          src: 'js/*',
+          src: 'js/**/*',
           dest: '../public/'
-        }, {
-          src: 'bower_components/requirejs/require.js',
-          dest: '../public/js/require.js'
-        }, {
-          src: 'bower_components/bootstrap/dist/js/bootstrap.js',
-          dest: '../public/js/bootstrap.js'
-        }, {
-          src: 'bower_components/jquery/dist/jquery.js',
-          dest: '../public/js/jquery.js'
-        }, {
-          src: 'bower_components/select2/select2.js',
-          dest: '../public/js/select2.js',
-        }, {
-          src: 'bower_components/angular/angular.js',
-          dest: '../public/js/angular.js'
-        }, {
-          src: 'bower_components/lodash/dist/lodash.js',
-          dest: '../public/js/lodash.js'
         }]
       },
       production: {
@@ -159,6 +160,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', ['connect', 'watch']);
   grunt.registerTask('server', ['connect', 'jade:development', 'less:development', 'copy:development', 'watch']);
-  grunt.registerTask('development', ['jade:development', 'less:development', 'copy:development', 'requirejs', 'watch']);
+  grunt.registerTask('development', ['jade:development', 'less:development', 'copy:lib', 'requirejs', 'copy:development', 'watch']);
   grunt.registerTask('build', ['copy:development', 'requirejs','jade:production', 'less:production', 'copy:production']);
 };
