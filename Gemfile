@@ -45,6 +45,7 @@ gem 'nokogiri'
 gem 'nori'
 gem 'squeel'
 gem 'rabl'
+gem 'oj'
 
 group :development do
   gem "better_errors", '=1.1.0'
