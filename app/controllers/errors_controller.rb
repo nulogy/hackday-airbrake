@@ -2,7 +2,7 @@ class ErrorsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @errors = ErrorRepository.all.joins{taskforce.outer}.includes(:taskforce)
+    @errors = ErrorRepository.all.joins{application.outer}.includes(:application).joins{tags.outer}.includes(:tags)
 
     params.reject! { |key, value| [""].include?(value) }
 

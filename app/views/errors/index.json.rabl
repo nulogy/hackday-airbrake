@@ -19,6 +19,10 @@ attributes :environment
 attributes :group_xml
 
 
-child :taskforce do |taskforce|
-  extends("taskforce/show")
+child :application do |application|
+  extends("applications/show")
+end
+
+child :tags do |tags|
+  extends("tags/show")
 end

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="gingerQuake">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +7,7 @@
     <script type="text/javascript" src="/assets/application.js"></script>
     <link rel="stylesheet" href="/assets/application.css" />
   </head>
+
   <body ng-controller="FiltersController as ctrl">
     <div class="container-fluid">
       <div class="filters">
@@ -22,12 +23,6 @@
               <div class="form-group">
                 <label>Category</label>
                 <input name="category" ng-model="ctrl.filters.category" class="form-control category">
-              </div>
-            </div>
-            <div class="col-md-4 col-sm-8">
-              <div class="form-group">
-                <label>Taskforce</label>
-                <input name="taskforce.name" ng-model="ctrl.filters.taskforce.name" class="form-control taskforce_name">
               </div>
             </div>
           </div>
