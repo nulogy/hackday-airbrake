@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Tag.where(name: 'PM1').first_or_create
+Tag.where(name: 'PM2').first_or_create
+Tag.where(name: 'PM3').first_or_create
+Tag.where(name: 'QCloud').first_or_create
