@@ -1,4 +1,3 @@
-define(['jquery'], function ($) {
   function ErrorRepository($http, deserialize) {
     return {
       fetchErrors: function(filters, pagination) {
@@ -14,6 +13,3 @@ define(['jquery'], function ($) {
       }
     };
   }
-
-  return ErrorRepository;
-});
