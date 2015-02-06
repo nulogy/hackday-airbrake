@@ -22,7 +22,11 @@ ActiveRecord::Base.transaction do
   Application.all.each do |application|
     Airbrake::GroupRepository.fetch(application.airbrake_id, 40) do |groups|
       groups.each do |group|
-        ErrorFactory.from_airbrake(group).save!
+        error = ErrorFactory.from_airbrake(group)
+        tags = AutoTagger.tag_error(error)
+        error.tags = tags
+        error.save!
+        error.error_tags.each(&:save!)
       end
     end
   end

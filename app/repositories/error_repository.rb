@@ -6,7 +6,7 @@ module ErrorRepository
   end
 
   def where(filters)
-    Error.joins(:taskforce).where { filters }
+    Error.joins(:tags).where { filters }
   end
 
   def find(id)

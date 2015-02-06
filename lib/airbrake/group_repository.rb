@@ -31,6 +31,7 @@ module Airbrake
 
     def fetch
       url = UrlBuilder.build_url("/projects/#{project_id}/groups", start: @last_group_id)
+      Rails.logger.info("Fetching #{url}")
       json = JSON.parse(open(url).read)
 
       @last_group_id = json['end']

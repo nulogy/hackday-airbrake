@@ -53,7 +53,6 @@ module Airbrake
   end
 
 
-
   module NoticeDeserializer
     extend self
 
