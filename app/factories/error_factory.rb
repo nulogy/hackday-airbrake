@@ -1,18 +1,15 @@
 module ErrorFactory
   extend self
 
-  def create_error(group)
-    error = Error.create({
-      user_id: group.user_id, 
+  def from_airbrake(group)
+    Error.new({
+      airbrake_id: group.id,
       controller: group.controller,
       action: group.action,
       error_message: group.error_message,
-      group_id: group.id,
-      environment: group.rails_env
+      error_type: group.error_type,
+      environment: group.environment,
+      application: Application.find_by_airbrake_id(group.projectId)
     })
-    
-    ErrorProcessorService.process(error) if error.valid?
-
-    return error
   end
 end

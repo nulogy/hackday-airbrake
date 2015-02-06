@@ -3,6 +3,11 @@
   <thead>
   <tr>
     <th>ID</th>
+    <th>Application Name</th>
+    <th>Controller</th>
+    <th>Action</th>
+    <th>Error Type</th>
+    <th>Error Message</th>
   </tr>
   </thead>
 
@@ -10,8 +15,12 @@
   <% @errors.each do |error| %>
       <tr>
         <td><%= error.id %></td>
+        <td><%= error.application.name %></td>
+        <td><%= error.controller %></td>
+        <td><%= error.action %></td>
+        <td><%= error.error_type %></td>
+        <td><%= error.error_message %></td>
       </tr>
-
   <% end %>
   </tbody>
 </table>

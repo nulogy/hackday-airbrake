@@ -14,7 +14,7 @@ module DynamicAttributes
     end
   end
 
-  def method_missing method_name, *args
+  def method_missing(method_name, *args)
     if method_name[-1] == '='
       method_name = method_name.slice(0..-2)
       self.class.send(:attr_accessor, method_name)

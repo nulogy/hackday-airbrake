@@ -11,13 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150206012459) do
+ActiveRecord::Schema.define(version: 20150206040324) do
 
-  create_table "airbrake_exceptions", force: true do |t|
+  create_table "airbrake_exceptions", force: :cascade do |t|
     t.text "xml_result"
   end
 
-  create_table "error_tags", force: true do |t|
+  create_table "applications", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "airbrake_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "error_tags", force: :cascade do |t|
     t.integer  "error_id"
     t.integer  "tag_id"
     t.datetime "created_at"
@@ -27,7 +34,7 @@ ActiveRecord::Schema.define(version: 20150206012459) do
   add_index "error_tags", ["error_id"], name: "index_error_tags_on_error_id"
   add_index "error_tags", ["tag_id"], name: "index_error_tags_on_tag_id"
 
-  create_table "errors", force: true do |t|
+  create_table "errors", force: :cascade do |t|
     t.integer "user_id"
     t.text    "error_message"
     t.integer "site_id"
@@ -39,14 +46,16 @@ ActiveRecord::Schema.define(version: 20150206012459) do
     t.text    "username"
     t.text    "controller"
     t.text    "category"
-    t.integer "group_id"
     t.string  "action"
     t.string  "environment"
     t.text    "group_xml"
     t.integer "taskforce_id"
+    t.integer "application_id"
+    t.string  "airbrake_id"
+    t.string  "error_type"
   end
 
-  create_table "tags", force: true do |t|
+  create_table "tags", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
