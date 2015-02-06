@@ -1,21 +1,18 @@
 class AutocompleteController < ApplicationController
-  respond_to :json
-
   def all
-    puts "hurrrr"
-    puts params[:field_name]
     @fields = FieldRepository.all(params[:field_name])
-    puts "got these:"
-    puts @fields
-    respond_with @fields    
+    respond_with_json(@fields)
   end
 
   def contains
     @fields = FieldRepository.where(params[:field_name], params[:q])
-    respond_with @fields
+    respond_with_json(@fields)
   end
 
-  def taskforces
-
+  private
+  def respond_with_json(*params)
+    respond_to do |format|
+      format.json { render json: @fields.to_json}
+    end
   end
 end

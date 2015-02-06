@@ -1,8 +1,6 @@
 class ErrorsController < ApplicationController
-  respond_to :html, :json
-
   def index
-    @errors = ErrorRepository.all.joins{taskforce.outer}.includes(:taskforce)
+    @errors = ErrorRepository.all.joins{application.outer}.includes(:application).joins{tags.outer}.includes(:tags)
 
     params.reject! { |key, value| [""].include?(value) }
 
@@ -12,14 +10,20 @@ class ErrorsController < ApplicationController
     @errors = Pagination.apply(@errors, @pagination)
     @errors = Filters.apply(@errors, @filters)
 
-    respond_with(@collection = @errors)
+    @collection = @errors
+
+    respond_to do |format|
+      format.json { render 'index.json' }
+    end
   end
 
   def create
     @group = Airbrake::GroupRepository.find(params[:group_id])
     @error = ErrorFactory.create_error(@group)
 
-    redirect_to error_url(@error)
+    redirect_to do |format|
+      error_url(@error)
+    end
   end
 
   def show

@@ -1,4 +1,3 @@
-define([], function () {
   function PaginationCtrl($scope) {
     $scope.totalItems = 64;
     $scope.numPages = 100;
@@ -8,6 +7,3 @@ define([], function () {
       console.log('Page changed to: ' + $scope.currentPage);
     };
   }
-
-  return PaginationCtrl;
-});

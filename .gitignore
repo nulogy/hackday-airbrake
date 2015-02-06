@@ -18,13 +18,8 @@
 # Dependency directory
 # Deployed apps should consider commenting this line out:
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
-/frontend/node_modules
+/public/assets
 
-/frontend/bower_components
-/frontend/public
-/public/js
-/public/css
-/public/index.html
 /.idea/*
 /config/database.yml
 config/database.yml

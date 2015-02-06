@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="gingerQuake">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/common.css">
-    <link rel="stylesheet" href="/css/main.css">
+    <script type="text/javascript" src="/assets/application.js"></script>
+    <link rel="stylesheet" href="/assets/application.css" />
   </head>
+
   <body ng-controller="FiltersController as ctrl">
     <div class="container-fluid">
       <div class="filters">
@@ -22,12 +23,6 @@
               <div class="form-group">
                 <label>Category</label>
                 <input name="category" ng-model="ctrl.filters.category" class="form-control category">
-              </div>
-            </div>
-            <div class="col-md-4 col-sm-8">
-              <div class="form-group">
-                <label>Taskforce</label>
-                <input name="taskforce.name" ng-model="ctrl.filters.taskforce.name" class="form-control taskforce_name">
               </div>
             </div>
           </div>
@@ -58,6 +53,7 @@
         <table class="table table-condensed table-striped">
           <thead>
             <tr>
+              <th>Application</th>
               <th>Error ID</th>
               <th>Company</th>
               <th>Account</th>
@@ -65,8 +61,8 @@
               <th>User</th>
               <th>Controller</th>
               <th>Category</th>
-              <th>Taskforce</th>
               <th>Actions</th>
+              <th>Tags</th>
             </tr>
           </thead>
           <tbody>
@@ -74,16 +70,19 @@
               <td colspan="6">No Errors</td>
             </tr>
             <tr ng-hide="ctrl.noErrors" ng-repeat="error in ctrl.errors">
-              <td ng-bind="error.id"></td>
-              <td ng-bind="error.company_name"></td>
-              <td ng-bind="error.account_name"></td>
-              <td ng-bind="error.site_id"></td>
-              <td ng-bind="error.username"></td>
-              <td>{{error.controller}}#{{error.action}}</td>
-              <td ng-bind="error.category"></td>
-              <td ng-bind="error.taskforce.name"></td>
+              <td>{{ error.application.name}}</td>
+              <td>{{ error.id }}</td>
+              <td>{{ error.company_name }}</td>
+              <td>{{ error.account_name }}</td>
+              <td>{{ error.site_id }}</td>
+              <td>{{ error.username }}</td>
+              <td>{{ error.controller }}#{{ error.action }}</td>
+              <td>{{ error.category }}</td>
               <td>
                 <button class="btn btn-success btn-xs">View Details</button>
+              </td>
+              <td>
+                <span class="label" ng-repeat="tag in error.tags">{{ tag.name }}</span>
               </td>
             </tr>
           </tbody>
@@ -93,15 +92,5 @@
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="/js/require.js"></script>
-    <script>
-      require(['/js/requireConfig.js'], function (config) {
-        try {
-          require(['main']);
-        } catch (e) {
-          console.log(e);
-        }
-      });
-    </script>
   </body>
 </html>
