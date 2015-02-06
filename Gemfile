@@ -14,7 +14,10 @@ gem 'pg'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
+
+
 gem 'angularjs-rails', '~> 1.3.10'
+gem 'select2-rails'
 
 gem 'twitter-bootstrap-rails'
 gem 'squeel'
@@ -22,8 +25,8 @@ gem 'rabl'
 gem 'oj'
 
 group :development do
-  gem "better_errors", '=1.1.0'
-  gem "binding_of_caller"
+  gem 'better_errors', '=1.1.0'
+  gem 'binding_of_caller'
 end
 
 gem 'fast-stemmer'

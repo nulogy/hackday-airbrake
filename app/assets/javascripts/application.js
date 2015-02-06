@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require twitter/bootstrap
+//= require select2
 //= require ./lib/angular
 
 //= require_tree ./lib

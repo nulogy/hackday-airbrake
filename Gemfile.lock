@@ -36,12 +36,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-<<<<<<< HEAD
-    arel (6.0.0)
-=======
     angularjs-rails (1.3.10)
-    arel (5.0.1.20140414130214)
->>>>>>> Get frontend into the asset pipeline and not throwing errors
+    arel (6.0.0)
     better_errors (1.1.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -127,6 +123,8 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    select2-rails (3.5.9.2)
+      thor (~> 0.14)
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -144,12 +142,6 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
-<<<<<<< HEAD
-=======
-    treetop (1.4.15)
-      polyglot
-      polyglot (>= 0.3.1)
->>>>>>> Get frontend into the asset pipeline and not throwing errors
     twitter-bootstrap-rails (3.2.0)
       actionpack (~> 4.1)
       execjs (~> 2.2)
@@ -178,6 +170,7 @@ DEPENDENCIES
   rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  select2-rails
   sqlite3
   squeel
   twitter-bootstrap-rails
