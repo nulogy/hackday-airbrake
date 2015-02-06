@@ -27,3 +27,4 @@
 /public/index.html
 /.idea/*
 /config/database.yml
+config/database.yml
