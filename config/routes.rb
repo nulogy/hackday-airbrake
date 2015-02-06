@@ -63,4 +63,6 @@ Rails.application.routes.draw do
   
   get 'autocomplete/:field_name', controller: 'autocomplete', action: 'all'
   get 'autocomplete/:field_name/:q', controller: 'autocomplete', action: 'contains'
+
+  root controller: 'home', action: 'index'
 end

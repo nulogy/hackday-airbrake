@@ -1,0 +1,17 @@
+
+<table class="table-striped table-compressed">
+  <thead>
+  <tr>
+    <th>ID</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @errors.each do |error| %>
+      <tr>
+        <td><%= error.id %></td>
+      </tr>
+
+  <% end %>
+  </tbody>
+</table>
