@@ -1,7 +1,8 @@
 class Error < ActiveRecord::Base
-  belongs_to :taskforce
+  has_many :error_tags
+  has_many :tags, :through => :error_tags
 
-  validates :user_id, 
+  validates :user_id,
     presence: true
 
   validates :group_id,

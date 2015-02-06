@@ -11,11 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150206011347) do
+ActiveRecord::Schema.define(version: 20150206012459) do
 
   create_table "airbrake_exceptions", force: true do |t|
     t.text "xml_result"
   end
+
+  create_table "error_tags", force: true do |t|
+    t.integer  "error_id"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "error_tags", ["error_id"], name: "index_error_tags_on_error_id"
+  add_index "error_tags", ["tag_id"], name: "index_error_tags_on_tag_id"
 
   create_table "errors", force: true do |t|
     t.integer "user_id"
