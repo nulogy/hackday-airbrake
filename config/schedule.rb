@@ -20,6 +20,6 @@
 # Learn more: http://github.com/javan/whenever
 
 
-ever 1.minute do
-  rake 'airbrake:import'
+every 1.minute do
+  rake 'airbrake:import:all'
 end
