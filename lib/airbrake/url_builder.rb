@@ -2,15 +2,28 @@ module Airbrake
   module UrlBuilder
     extend self
 
-    HOST = "packmanager.airbrake.io"
     PATH_PREFIX = "/api/v3/"
-    AUTH_TOKEN = "7c67d2875f9f5f803f3a3f94f10e44173652639a"
+    CONFIG_LOCATION = "/config/airbrake.yml"
+
+    def config
+      return @config if @config
+      rails_root = ::Rails.root.to_s || File.dirname(__FILE__) + '/../'
+      @config = YAML.load(ERB.new(File.read(rails_root + CONFIG_LOCATION)).result).symbolize_keys
+    end
+
+    def token
+      config[:token]
+    end
+
+    def host
+      config[:host]
+    end
 
     def build_url(path, params = {})
-      params.merge!(key: AUTH_TOKEN)
+      params.merge!(key: token)
 
       URI::HTTPS.build(
-        host: HOST,
+        host: host,
         path: PATH_PREFIX + path,
         query: params.to_query
       )
