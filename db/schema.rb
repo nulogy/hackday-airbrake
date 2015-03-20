@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150206040324) do
+ActiveRecord::Schema.define(version: 20150320152607) do
 
   create_table "airbrake_exceptions", force: :cascade do |t|
     t.text "xml_result"
@@ -35,24 +35,26 @@ ActiveRecord::Schema.define(version: 20150206040324) do
   add_index "error_tags", ["tag_id"], name: "index_error_tags_on_tag_id"
 
   create_table "errors", force: :cascade do |t|
-    t.integer "user_id"
-    t.text    "error_message"
-    t.integer "site_id"
-    t.integer "account_id"
-    t.integer "company_id"
-    t.text    "site_name"
-    t.text    "account_name"
-    t.text    "company_name"
-    t.text    "username"
-    t.text    "controller"
-    t.text    "category"
-    t.string  "action"
-    t.string  "environment"
-    t.text    "group_xml"
-    t.integer "taskforce_id"
-    t.integer "application_id"
-    t.string  "airbrake_id"
-    t.string  "error_type"
+    t.integer  "user_id"
+    t.text     "error_message"
+    t.integer  "site_id"
+    t.integer  "account_id"
+    t.integer  "company_id"
+    t.text     "site_name"
+    t.text     "account_name"
+    t.text     "company_name"
+    t.text     "username"
+    t.text     "controller"
+    t.text     "category"
+    t.string   "action"
+    t.string   "environment"
+    t.text     "group_xml"
+    t.integer  "taskforce_id"
+    t.integer  "application_id"
+    t.string   "airbrake_id"
+    t.string   "error_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "tags", force: :cascade do |t|
