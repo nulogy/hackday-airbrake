@@ -14,7 +14,7 @@ module ErrorRepository
   end
 
   def find_by_group(group)
-    Error.find_by_group_id(group.id)
+    Error.find_by_airbrake_id(group.id)
   end
 
   def persist(error)
