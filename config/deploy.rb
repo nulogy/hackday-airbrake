@@ -24,17 +24,26 @@ task :production do
 end
 
 namespace :deploy do
+    before "deploy:assets:precompile", "deploy:symlink_application_config"
+
     task :nginx_config, :roles => :web, :except => { :no_release => true } do
         run "mkdir -p #{shared_path}/config"
         run "#{try_sudo} cp -f #{current_path}/config/nginx.conf #{shared_path}/config/nginx.conf"
         run "#{try_sudo} ln -fs #{shared_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}.conf"
     end
+
+    task :symlink_application_config, :roles => :web, :except => { :no_release => true } do
+        run "#{try_sudo} ln -fs #{shared_path}/config/database.yml #{latest_release}/config/database.yml"
+        run "#{try_sudo} ln -fs #{shared_path}/config/airbrake.yml #{latest_release}/config/airbrake.yml"
+    end
+
     task :create_logspace, :roles => :app, :except => { :no_release => true } do
         run "mkdir -p #{shared_path}/log"
         run "touch #{shared_path}/log/production.log"
     end
     after "deploy:create_symlink", "deploy:create_logspace"
     after "deploy:create_logspace", "deploy:nginx_config"
+
     desc "Restart Passenger gracefully"
     task :apprestart, :roles => :app, :except => { :no_release => true } do
         run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
