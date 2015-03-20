@@ -30,7 +30,7 @@ module AutoTagger
         ]
   }
 
-  def tag_error(error)
+  def generate(error)
     phrase_lemmatized = lemmatize_error_phrase(error)
 
     tags = []
@@ -42,6 +42,13 @@ module AutoTagger
     end
 
     tags
+  end
+
+  def tag(error)
+    tags = generate(error)
+    error.tags = tags
+
+    return tags
   end
 
   def lemmatize_error_phrase(error)
