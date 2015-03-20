@@ -24,11 +24,10 @@ production:
   <<: *default
   database: db/production.sqlite3
 
-snapshot_database:
+hydration_db:
   adapter: postgresql
-  host: greg.local
-  user: nulogy
-  password: Nulogy4Ever
+  host: HOST
+  user: USER
+  password: PASSWORD
   port: 5432
-  template: template_packmanager
-  database: packmanager_na_snapshot_20150131
+  database: DATABASE
