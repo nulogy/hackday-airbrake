@@ -87,8 +87,9 @@
             </tr>
           </tbody>
         </table>
-        <div ng-controller="PaginationCtrl as ctrl" class="text-center">
-          <pagination total-items="totalItems" ng-model="currentPage" boundary-links="true" num-pages="numPages" class="pagination-sm"></pagination>
+        <div class="text-center">
+          <button class="back-btn" ng-click="ctrl.first()">First</button>
+          <button class="next-btn" ng-click="ctrl.next()">Next</button>
         </div>
       </div>
     </div>

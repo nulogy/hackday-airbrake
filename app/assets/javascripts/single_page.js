@@ -4,8 +4,6 @@ app.factory('ErrorDeserializer', ['$http', ErrorDeserializer]);
 app.factory('ErrorRepository', ['$http', 'ErrorDeserializer', ErrorRepository]);
 
 app.controller('FiltersController', ['$scope', 'ErrorRepository', FiltersController]);
-app.controller('PaginationCtrl', ['$scope', PaginationCtrl]);
-
 
 jQuery(function () {
   function setupAutoComplete(selector, config) {

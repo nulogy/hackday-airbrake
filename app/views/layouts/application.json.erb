@@ -1,8 +1,8 @@
 {
   "result": <%= yield %>,
   "pagination": {
-    "offset": <%= @pagination[:offset] %>,
-    "limit": <%= @pagination[:limit] %>,
+    "offset": <%= @pagination[:offset] || '""'.html_safe %>,
+    "limit": <%= @pagination[:limit] || '""'.html_safe %>,
     "rowCount": <%= @collection.except(:limit, :offset).count %>
   }
 }

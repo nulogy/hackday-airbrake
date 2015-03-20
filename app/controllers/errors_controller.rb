@@ -1,6 +1,6 @@
 class ErrorsController < ApplicationController
   def index
-    @errors = ErrorRepository.all.joins{application.outer}.includes(:application).joins{tags.outer}.includes(:tags)
+    @errors = ErrorRepository.all.joins{application.outer}.includes(:application).joins{tags.outer}.includes(:tags).order("errors.id DESC")
 
     params.reject! { |key, value| [""].include?(value) }
 
@@ -30,8 +30,6 @@ class ErrorsController < ApplicationController
     @error = ErrorRepository.find(params[:id])
   end
 
-
-
 private
   module Pagination
     extend self
@@ -40,10 +38,10 @@ private
       pagination ||= {}
 
       limit = pagination[:limit]
-      offset = pagination[:offset]
+      last_id = pagination[:last_id]
 
       scope = scope.limit(limit) if limit
-      scope = scope.offset(offset) if offset
+      scope = scope.where("errors.id < ?", last_id) if last_id.present?
 
       return scope
     end
@@ -52,8 +50,8 @@ private
       pagination ||= {}
 
       return {
-        limit: pagination.fetch(:limit, -1),
-        offset: pagination.fetch(:offset, -1)
+        limit: pagination.fetch(:limit, 20),
+        last_id: pagination.fetch(:last_id, nil)
       }
     end
   end
