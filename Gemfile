@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
 
@@ -10,13 +9,12 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 gem 'pg'
+gem 'database_cleaner'
 
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
-
-gem 'angularjs-rails', '~> 1.3.10'
 gem 'select2-rails'
 
 gem 'twitter-bootstrap-rails'
@@ -30,3 +28,4 @@ group :development do
 end
 
 gem 'fast-stemmer'
+gem 'whenever', require: false
