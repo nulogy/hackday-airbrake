@@ -7,7 +7,7 @@ require "bundler/capistrano"
 set :user, "nulogy"
 set :password, "Nulogy4Ever"
 set :application, "airbrake"
-set :repository,  "readonlycode@porcupine.nu:/home/code/airbrake.git"
+set :repository,  "git@github.com/nulogy/hackday-airbrake"
 set :scm, :git
 set :scm_verbose, true
 set :deploy_to, "/data/#{application}"
