@@ -15,8 +15,6 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
-
-gem 'angularjs-rails', '~> 1.3.10'
 gem 'select2-rails'
 
 gem 'twitter-bootstrap-rails'
@@ -30,3 +28,4 @@ group :development do
 end
 
 gem 'fast-stemmer'
+gem 'whenever', require: false
