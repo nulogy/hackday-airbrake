@@ -64,6 +64,7 @@
               <th>Created At</th>
               <th>Category</th>
               <th>Actions</th>
+              <th></th>
               <th>Tags</th>
             </tr>
           </thead>
@@ -83,6 +84,9 @@
               <td>{{ error.category }}</td>
               <td>
                 <button class="btn btn-success btn-xs">View Details</button>
+              </td>
+              <td>
+                <a ng-href="https://packmanager.airbrake.io/projects/{{error.application.airbrake_id}}/groups/{{error.airbrake_id}}"><span class="glyphicon glyphicon-plane"/></a>
               </td>
               <td>
                 <span class="label label-info" ng-repeat="tag in error.tags">{{ tag.tag.name }}</span>

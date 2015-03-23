@@ -17,6 +17,7 @@ attributes :group_id
 attributes :action
 attributes :environment
 attributes :group_xml
+attributes :airbrake_id
 
 
 child :application do |application|
