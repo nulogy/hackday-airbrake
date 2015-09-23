@@ -18,9 +18,9 @@ ssh_options[:forward_agent] = true
 ssh_options[:port] = 22
 
 task :production do
-    role :web, "192.168.50.37:22"                          # Your HTTP server, Apache/etc
-    role :app, "192.168.50.37:22"                          # This may be the same as your `Web` server
-    role :db,  "192.168.50.37:22", :primary => true        # This is where Rails migrations will run, NOT NECESSARILY where the database actually is
+    role :web, "10.1.9.9:22"                          # Your HTTP server, Apache/etc
+    role :app, "10.1.9.9:22"                          # This may be the same as your `Web` server
+    role :db,  "10.1.9.9:22", :primary => true        # This is where Rails migrations will run, NOT NECESSARILY where the database actually is
 end
 
 namespace :deploy do
