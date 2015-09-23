@@ -2,7 +2,7 @@ module Airbrake
   module UrlBuilder
     extend self
 
-    PATH_PREFIX = "/api/v3/"
+    PATH_PREFIX = "/api/v3"
     CONFIG_LOCATION = "/config/airbrake.yml"
 
     def config
